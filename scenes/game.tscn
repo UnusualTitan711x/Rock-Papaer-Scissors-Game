@@ -1,0 +1,165 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6jir4v24q112"]
+
+[ext_resource type="Script" uid="uid://cxc387mwgrt4l" path="res://scripts/game.gd" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://b0upwe6mlfcsn" path="res://assets/paper.png" id="2_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://d4civeuwu7bek" path="res://assets/rock.png" id="3_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://psj4v3g654sj" path="res://assets/scissors.png" id="4_iywne"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iywne"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.898039, 0.0392157, 0.0392157, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p57ef"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnu2h"]
+bg_color = Color(0, 0, 0, 0.329412)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbhrr"]
+bg_color = Color(0, 0, 0, 0.713726)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqjtg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_uwrxv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -232.0
+offset_top = -158.5
+offset_right = 232.0
+offset_bottom = 100.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 124
+
+[node name="Player" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/Player"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "PLAYER"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer/Player"]
+layout_mode = 2
+texture = ExtResource("2_yqjtg")
+expand_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Computer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/Computer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "COMPUTER"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer/Computer"]
+layout_mode = 2
+texture = ExtResource("2_yqjtg")
+expand_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = 87.5
+offset_right = 38.0
+offset_bottom = 188.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RockButton" type="Button" parent="CanvasLayer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 76
+theme_override_styles/focus = SubResource("StyleBoxFlat_iywne")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_p57ef")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lnu2h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lbhrr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_yqjtg")
+icon = ExtResource("3_lbhrr")
+icon_alignment = 1
+
+[node name="PaperButton" type="Button" parent="CanvasLayer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 76
+theme_override_styles/focus = SubResource("StyleBoxFlat_iywne")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_p57ef")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lnu2h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lbhrr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_yqjtg")
+icon = ExtResource("2_yqjtg")
+icon_alignment = 1
+
+[node name="ScissorsButton" type="Button" parent="CanvasLayer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 76
+theme_override_styles/focus = SubResource("StyleBoxFlat_iywne")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_p57ef")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lnu2h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lbhrr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_yqjtg")
+icon = ExtResource("4_iywne")
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -24.5
+offset_right = 51.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "DRAW"
+horizontal_alignment = 1
+vertical_alignment = 1
