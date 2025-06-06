@@ -21,14 +21,14 @@ corner_radius_bottom_left = 8
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnu2h"]
-bg_color = Color(0, 0, 0, 0.329412)
+bg_color = Color(0, 0, 0, 0)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbhrr"]
-bg_color = Color(0, 0, 0, 0.713726)
+bg_color = Color(0, 0, 0, 0)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -50,7 +50,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="Players" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -64,43 +64,43 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 124
 
-[node name="Player" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+[node name="Player" type="VBoxContainer" parent="CanvasLayer/Players"]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_constants/separation = -10
 
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/Player"]
+[node name="Label" type="Label" parent="CanvasLayer/Players/Player"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "PLAYER"
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer/Player"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Players/Player"]
 layout_mode = 2
 texture = ExtResource("2_yqjtg")
 expand_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="Computer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+[node name="Computer" type="VBoxContainer" parent="CanvasLayer/Players"]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_constants/separation = -10
 
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/Computer"]
+[node name="Label" type="Label" parent="CanvasLayer/Players/Computer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "COMPUTER"
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer/Computer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Players/Computer"]
 layout_mode = 2
 texture = ExtResource("2_yqjtg")
 expand_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer"]
+[node name="HandsButtons" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -113,7 +113,8 @@ offset_bottom = 188.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RockButton" type="Button" parent="CanvasLayer/HBoxContainer2"]
+[node name="RockButton" type="Button" parent="CanvasLayer/HandsButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/icon_max_width = 76
 theme_override_styles/focus = SubResource("StyleBoxFlat_iywne")
@@ -124,7 +125,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_yqjtg")
 icon = ExtResource("3_lbhrr")
 icon_alignment = 1
 
-[node name="PaperButton" type="Button" parent="CanvasLayer/HBoxContainer2"]
+[node name="PaperButton" type="Button" parent="CanvasLayer/HandsButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/icon_max_width = 76
 theme_override_styles/focus = SubResource("StyleBoxFlat_iywne")
@@ -135,7 +137,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_yqjtg")
 icon = ExtResource("2_yqjtg")
 icon_alignment = 1
 
-[node name="ScissorsButton" type="Button" parent="CanvasLayer/HBoxContainer2"]
+[node name="ScissorsButton" type="Button" parent="CanvasLayer/HandsButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/icon_max_width = 76
 theme_override_styles/focus = SubResource("StyleBoxFlat_iywne")
@@ -146,7 +149,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_yqjtg")
 icon = ExtResource("4_iywne")
 icon_alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Outcome" type="Label" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -163,3 +166,27 @@ theme_override_font_sizes/font_size = 30
 text = "DRAW"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Countdown" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -177.5
+offset_right = 51.0
+offset_bottom = -128.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="pressed" from="CanvasLayer/HandsButtons/RockButton" to="." method="_on_rock_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HandsButtons/PaperButton" to="." method="_on_paper_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HandsButtons/ScissorsButton" to="." method="_on_scissors_button_pressed"]
