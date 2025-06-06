@@ -14,7 +14,7 @@ const HANDS = [ROCK, PAPER, SCISSORS]
 @onready var rock_button: Button = %RockButton
 @onready var paper_button: Button = %PaperButton
 @onready var scissors_button: Button = %ScissorsButton
-
+@onready var play_button: Button = $CanvasLayer/PlayButton
 
 var player_choice: int
 var computer_choice: int
@@ -34,12 +34,19 @@ func _ready() -> void:
 	paper_button.focus_mode = Control.FOCUS_NONE
 	scissors_button.focus_mode = Control.FOCUS_NONE
 	
+	rock_button.focus_entered.connect(_on_rock_button_pressed)
+	paper_button.focus_entered.connect(_on_paper_button_pressed)
+	scissors_button.focus_entered.connect(_on_scissors_button_pressed)
+	
 	countdown_label.text = str(current_time)
 	timer.timeout.connect(_on_timer_timeout)
 
 func _process(delta: float) -> void:
 	# start the timer and let player pick a hand
-	if Input.is_action_just_pressed("start") and current_time <= 0:
+	if (Input.is_action_just_pressed("start") or play_button.button_pressed) and current_time <= 0:
+		player_texture.texture = null
+		computer_texture.texture = null
+		
 		rock_button.disabled = false
 		paper_button.disabled = false
 		scissors_button.disabled = false
@@ -48,17 +55,11 @@ func _process(delta: float) -> void:
 		rock_button.grab_focus()
 		paper_button.focus_mode = Control.FOCUS_ALL
 		scissors_button.focus_mode = Control.FOCUS_ALL
-		
+		play_button.focus_mode = Control.FOCUS_NONE
 		current_time = countdown_time
 		countdown_label.text = str(current_time)
 		timer.start()
-	
-	if rock_button.focus_entered:
-		player_choice = 1
-	elif paper_button.focus_entered:
-		player_choice = 2
-	elif scissors_button.focus_entered:
-		player_choice = 3
+
 
 func _on_timer_timeout():
 	current_time -= 1
@@ -76,6 +77,7 @@ func countdown_finished():
 	rock_button.focus_mode = Control.FOCUS_NONE
 	paper_button.focus_mode = Control.FOCUS_NONE
 	scissors_button.focus_mode = Control.FOCUS_NONE
+	play_button.focus_mode = Control.FOCUS_ALL
 	
 	computer_choice = randi() % 3
 	
